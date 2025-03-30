@@ -9,6 +9,7 @@ import {
 import { firebaseAuth, firebaseDB } from "./config";
 import { TUserFormValues } from "./authtypes";
 import { doc, setDoc } from "firebase/firestore";
+import { TCoffeeConsumptionHistory } from "../lib/types";
 
 //required if you want to keep logged in after user exits the browser or closes tab
 setPersistence(firebaseAuth, browserLocalPersistence);
@@ -39,7 +40,10 @@ const resetPassword = async (email: string) => {
 	await sendPasswordResetEmail(firebaseAuth, email);
 };
 
-const postToDatabase = async (userId: string, toPost: object) => {
+const postToDatabase = async (
+	userId: string,
+	toPost: TCoffeeConsumptionHistory
+) => {
 	const userRef = doc(firebaseDB, "users", userId);
 	await setDoc(userRef, toPost, { merge: true });
 };

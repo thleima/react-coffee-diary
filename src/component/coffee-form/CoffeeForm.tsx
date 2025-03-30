@@ -8,9 +8,9 @@ import { coffeeOptions } from "../../lib/constants";
 import { useState } from "react";
 import { TCoffeeForm, TCoffeeConsumptionHistory } from "../../lib/types";
 import { createPortal } from "react-dom";
-import { useAuth } from "../../store/AuthContext";
 
 import { getNowTimeMinestTimeAgo } from "../../utils";
+import { useAuth } from "../../hooks/useAuth";
 
 export default function CoffeeForm() {
 	const [selectedCoffee, setSelectedCoffee] = useState<TCoffeeForm>({
@@ -85,6 +85,15 @@ export default function CoffeeForm() {
 		}
 	};
 
+	const handleClickOther = () => {
+		setSelectedCoffee({
+			...selectedCoffee,
+			name: "",
+			caffeine: 0,
+		});
+		setShowOther((prev) => !prev);
+	};
+
 	return (
 		<div className="coffee-form-container">
 			<Title title="Start tracking now" icon="pencil" />
@@ -102,14 +111,7 @@ export default function CoffeeForm() {
 						);
 					})}
 					<button
-						onClick={() => {
-							setSelectedCoffee({
-								...selectedCoffee,
-								name: "",
-								caffeine: 0,
-							});
-							setShowOther((prev) => !prev);
-						}}
+						onClick={handleClickOther}
 						className={`${showOther ? "coffee-button-selected" : ""}`}>
 						<h4>Other</h4>
 					</button>
@@ -186,7 +188,7 @@ export default function CoffeeForm() {
 				</div>
 			</div>
 			<div className="add">
-				<Button handleClick={handleSubmitForm} text={"Add Coffee"} />
+				<Button handleClick={handleSubmitForm} text={"Add Coffee"} icon />
 				{showLogModal &&
 					createPortal(
 						<Modal>

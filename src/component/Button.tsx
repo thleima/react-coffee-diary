@@ -1,16 +1,12 @@
 type ButtonProps = {
 	handleClick: () => void;
 	text: string;
+	icon?: boolean;
 };
 
-export default function Button({ handleClick, text }: ButtonProps) {
-	const withIcon =
-		text.includes("Sign up") ||
-		text.includes("Log out") ||
-		text.includes("Log in") ||
-		text.includes("Add Coffee");
+export default function Button({ handleClick, text, icon }: ButtonProps) {
 	return (
-		<button onClick={handleClick} className={withIcon ? "btn-icon" : ""}>
+		<button onClick={handleClick} className={icon ? "btn-icon" : ""}>
 			<p>{text}</p>
 			{text.includes("Sign up") && <i className="fa-solid fa-rocket"></i>}
 			{text.includes("Log out") && (

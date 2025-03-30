@@ -11,8 +11,8 @@ export default function StatProgressBar({ level }: StatProgressBarProps) {
 
 	const maxLevel = statusLevels["High"].maxLevel;
 
-	const progressBarWidth = Math.max(getLevelAsWidth(level, maxLevel), 14);
 	// Set a minimum width of 14% for the progress bar
+	const progressBarWidth = Math.max(getLevelAsWidth(level, maxLevel), 14);
 
 	return (
 		<>

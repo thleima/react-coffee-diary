@@ -1,4 +1,4 @@
-import { useAuth } from "../../store/AuthContext";
+import { useAuth } from "../../hooks/useAuth";
 import Button from "../Button";
 
 export default function Header() {
@@ -7,9 +7,9 @@ export default function Header() {
 		<header>
 			<h1>Coffee Diary</h1>
 			{user ? (
-				<Button handleClick={logout} text={"Log out"} />
+				<Button handleClick={logout} text={"Log out"} icon />
 			) : (
-				<Button handleClick={toggleLogModal} text={"Sign up Free"} />
+				<Button handleClick={toggleLogModal} text={"Sign up Free"} icon />
 			)}
 		</header>
 	);

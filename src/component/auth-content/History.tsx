@@ -1,4 +1,4 @@
-import { useAuth } from "../../store/AuthContext";
+import { useAuth } from "../../store/AuthProvider";
 import { historyAsArray } from "../../utils";
 import Title from "../Title";
 import TableHead from "./TableHead";

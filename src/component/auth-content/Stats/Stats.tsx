@@ -1,4 +1,4 @@
-import { useAuth } from "../../../store/AuthContext";
+import { useAuth } from "../../../hooks/useAuth";
 import {
 	calculateCoffeeStats,
 	calculateCurrentCaffeineLevel,
@@ -41,7 +41,7 @@ export default function Stats() {
 					<tbody>
 						{topThreeCoffees.length === 0 ? (
 							<tr>
-								<td colSpan={4}>No coffes yet !</td>
+								<td colSpan={4}>No coffees yet !</td>
 							</tr>
 						) : (
 							topThreeCoffees.map((coffee, index) => {

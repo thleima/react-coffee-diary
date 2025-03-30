@@ -1,4 +1,4 @@
-import { useAuth } from "./store/AuthContext";
+import { useAuth } from "./store/AuthProvider";
 import Layout from "./component/Layout";
 import Benefits from "./component/layout/Benefits";
 import CoffeeForm from "./component/coffee-form/CoffeeForm";

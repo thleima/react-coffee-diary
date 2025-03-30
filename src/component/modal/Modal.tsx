@@ -1,5 +1,5 @@
+import { useAuth } from "../../hooks/useAuth";
 import { TChildren } from "../../lib/types";
-import { useAuth } from "../../store/AuthContext";
 
 export default function Modal({ children }: TChildren) {
 	const { toggleLogModal } = useAuth();

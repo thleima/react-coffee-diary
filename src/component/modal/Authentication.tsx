@@ -4,8 +4,8 @@ import {
 	handleCredsErrors,
 } from "../../utils/helpers";
 import { useState } from "react";
-import { useAuth } from "../../store/AuthContext";
 import Button from "../Button";
+import { useAuth } from "../../hooks/useAuth";
 
 export default function Authentication() {
 	const [isRegister, setIsRegister] = useState(true);
@@ -57,6 +57,7 @@ export default function Authentication() {
 				<Button
 					handleClick={toggleRegister}
 					text={isRegister ? "Log in" : "Sign up"}
+					icon
 				/>
 			</div>
 			<hr />
