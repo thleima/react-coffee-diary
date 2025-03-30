@@ -1,4 +1,8 @@
-import { checkCreds, handleCredsErrors } from "../../utils/helpers";
+import {
+	checkCreds,
+	getErrorMessage,
+	handleCredsErrors,
+} from "../../utils/helpers";
 import { useState } from "react";
 import { useAuth } from "../../store/AuthContext";
 import Button from "../Button";
@@ -38,7 +42,8 @@ export default function Authentication() {
 			setError("");
 			toggleLogModal();
 		} catch (err) {
-			setError(handleCredsErrors(err));
+			const reportError = getErrorMessage(err);
+			setError(handleCredsErrors(reportError));
 		}
 	};
 	return (
