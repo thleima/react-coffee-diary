@@ -5,7 +5,7 @@ import CoffeeCard from "./CoffeeCard";
 import Info from "./Info";
 import Title from "../Title";
 import { coffeeOptions } from "../../lib/constants";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { TCoffeeForm, TCoffeeConsumptionHistory } from "../../lib/types";
 import { createPortal } from "react-dom";
 
@@ -13,6 +13,7 @@ import { getNowTimeMinestTimeAgo } from "../../utils";
 import { useAuth } from "../../hooks/useAuth";
 
 export default function CoffeeForm() {
+	const scrollRef = useRef<HTMLDivElement>(null);
 	const [selectedCoffee, setSelectedCoffee] = useState<TCoffeeForm>({
 		name: "",
 		caffeine: 0,
@@ -20,6 +21,13 @@ export default function CoffeeForm() {
 		minutes: 0,
 	});
 	const [showOther, setShowOther] = useState(false);
+
+	// Scroll to bottom, to see the stats, when user enter a coffee
+	const scrollBottom = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+		e.currentTarget.scrollIntoView({
+			behavior: "smooth",
+		});
+	};
 
 	const {
 		user,
@@ -42,6 +50,7 @@ export default function CoffeeForm() {
 			return;
 		}
 		try {
+			console.log(selectedCoffee);
 			const userDataCopy: TCoffeeConsumptionHistory = { ...userData };
 			// Process data to have the same format as in DataBase
 			// Get the timestamp as key
@@ -69,20 +78,16 @@ export default function CoffeeForm() {
 	};
 
 	const selectCoffee = (coffee: { name: string; caffeine: number }) => {
-		if (selectedCoffee.name) {
-			setSelectedCoffee({
-				...selectedCoffee,
-				name: "",
-				caffeine: 0,
-			});
-		} else {
-			setSelectedCoffee({
-				...selectedCoffee,
-				name: coffee.name,
-				caffeine: coffee.caffeine,
-			});
-			setShowOther(false);
+		if (coffee.name === selectedCoffee.name) {
+			setSelectedCoffee({ ...selectedCoffee, name: "", caffeine: 0 });
+			return;
 		}
+		setSelectedCoffee({
+			...selectedCoffee,
+			name: coffee.name,
+			caffeine: coffee.caffeine,
+		});
+		setShowOther(false);
 	};
 
 	const handleClickOther = () => {
@@ -128,7 +133,9 @@ export default function CoffeeForm() {
 						name="coffee-list"
 						id="coffee-list"
 						style={{ visibility: `${showOther ? "visible" : "hidden"}` }}>
-						<option value="">Select type</option>
+						<option disabled value="">
+							Select type
+						</option>
 						{coffeeOptions.slice(5).map((option, index) => {
 							return (
 								<option
@@ -148,6 +155,7 @@ export default function CoffeeForm() {
 					<div>
 						<h6>Hours</h6>
 						<select
+							value={selectedCoffee.hour}
 							onChange={(e) =>
 								setSelectedCoffee({
 									...selectedCoffee,
@@ -156,10 +164,11 @@ export default function CoffeeForm() {
 							}
 							name="hours-select"
 							id="hours-select">
+							<option value={0}>now</option>
 							{Array.from({ length: 12 }, (_, i) => {
 								return (
 									<option key={i} value={i}>
-										{i === 0 ? "Now" : i}
+										{i}
 									</option>
 								);
 							})}
@@ -168,6 +177,7 @@ export default function CoffeeForm() {
 					<div>
 						<h6>Mins</h6>
 						<select
+							value={selectedCoffee.minutes}
 							onChange={(e) =>
 								setSelectedCoffee({
 									...selectedCoffee,
@@ -176,10 +186,11 @@ export default function CoffeeForm() {
 							}
 							name="mins-select"
 							id="mins-select">
+							<option value={0}>now</option>
 							{[0, 15, 30, 45].map((min, i) => {
 								return (
 									<option key={i} value={min}>
-										{min === 0 ? "Now" : min}
+										{min}
 									</option>
 								);
 							})}
@@ -187,7 +198,10 @@ export default function CoffeeForm() {
 					</div>
 				</div>
 			</div>
-			<div className="add">
+			<div
+				className="add"
+				ref={scrollRef}
+				onClick={user ? (e) => scrollBottom(e) : (e) => e}>
 				<Button handleClick={handleSubmitForm} text={"Add Coffee"} icon />
 				{showLogModal &&
 					createPortal(

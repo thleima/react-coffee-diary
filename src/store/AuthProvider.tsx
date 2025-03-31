@@ -7,7 +7,7 @@ import { TUserFormValues } from "../firebase/authtypes";
 import firebaseService from "../firebase/authservice";
 
 export const AuthProvider = ({ children }: TChildren) => {
-	const { user, isLoading, userData, setUserData } = useAuthState();
+	const { user, isLoading, userData, setUserData, setUser } = useAuthState();
 	const [showLogModal, setShowLogModal] = useState(false);
 
 	const signIn = async (creds: TUserFormValues) => {
@@ -21,6 +21,7 @@ export const AuthProvider = ({ children }: TChildren) => {
 	};
 
 	const logout = () => {
+		setUser(null);
 		setUserData({});
 		return firebaseService.logout();
 	};

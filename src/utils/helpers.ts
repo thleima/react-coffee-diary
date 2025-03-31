@@ -1,7 +1,9 @@
 export const checkCreds = (email: string, password: string): boolean => {
 	if (!email || !email.includes("@") || !password || password.length < 6) {
+		console.log("Invalid email or password");
 		return false;
 	}
+	console.log("Valid email and password");
 	return true;
 };
 

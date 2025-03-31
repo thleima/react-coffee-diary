@@ -26,6 +26,7 @@ export default function Stats() {
 			<div className="stats-grid">
 				<StatCard lg title="Active Caffeine Level">
 					<StatText level={caffeine_level} />
+
 					<StatProgressBar level={caffeine_level} />
 				</StatCard>
 				<StatCard title="Avg Daily Caffeine">

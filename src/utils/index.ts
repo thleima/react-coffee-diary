@@ -110,7 +110,6 @@ export function timeSinceConsumption(utcMilliseconds: number): string {
 
 	// Define time units in milliseconds
 	const units = [
-		{ label: "month", value: 30 * 24 * 60 * 60 * 1000 },
 		{ label: "day", value: 24 * 60 * 60 * 1000 },
 		{ label: "hour", value: 60 * 60 * 1000 },
 		{ label: "minute", value: 60 * 1000 },
@@ -135,8 +134,8 @@ export function historyAsArray(
 	historyData: TCoffeeConsumptionHistory
 ): THistory[] {
 	return Object.keys(historyData)
+		.slice(0, 10) // Limit to last 10 coffees
 		.sort((a, b) => Number(b) - Number(a)) // Sort by most recent
-		.slice(0, 10) // Limit to 10 most recent entries
 		.map((time) => {
 			const coffee = historyData[time];
 			return {

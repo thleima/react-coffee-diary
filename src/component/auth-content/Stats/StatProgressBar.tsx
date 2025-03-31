@@ -16,16 +16,19 @@ export default function StatProgressBar({ level }: StatProgressBarProps) {
 
 	return (
 		<>
-			<div
-				className="progress-bar"
-				style={{
-					color: statusLevels[warningLevel].color,
-					backgroundColor: statusLevels[warningLevel].background,
-					width: `${progressBarWidth}%`,
-					transition: "width 0.6s ease-in",
-				}}>
-				{warningLevel}
+			<div className="bcg-progress">
+				<div
+					className="progress-bar"
+					style={{
+						color: statusLevels[warningLevel].color,
+						backgroundColor: statusLevels[warningLevel].background,
+						width: `${progressBarWidth}%`,
+						transition: "width 0.6s ease-in",
+					}}>
+					{warningLevel}
+				</div>
 			</div>
+
 			<p>{statusLevels[warningLevel].description}</p>
 		</>
 	);

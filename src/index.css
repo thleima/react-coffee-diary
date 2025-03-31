@@ -47,7 +47,7 @@ button {
 }
 
 hr {
-	margin: 0.4rem 0;
+	margin: 1.6rem 0;
 }
 
 input {
@@ -300,15 +300,20 @@ select#mins-select {
 
 /* Progress bar */
 
+.bcg-progress {
+	width: 100%;
+	background-color: var(--white);
+	border-radius: var(--border-radius);
+}
+
 .progress-bar {
 	display: flex;
 	justify-content: flex-start;
 	align-items: center;
 	padding-left: 1rem;
 	height: 1.6rem;
-	border-radius: var(--border-radius);
+	border-radius: inherit;
 	font-size: larger;
-	margin-top: 1rem;
 }
 
 .progress-bar + p {
@@ -346,6 +351,8 @@ select#mins-select {
 .modal-content {
 	display: flex;
 	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 	position: relative;
 	z-index: 101;
 	max-width: 400px;
@@ -354,10 +361,6 @@ select#mins-select {
 	min-height: 440px;
 	border-radius: var(--border-radius);
 	background: var(--vlight);
-	padding: 2.8rem 1rem;
-	display: flex;
-	flex-direction: column;
-	gap: 1rem;
 	box-shadow: var(--box-shadow-xl);
 }
 
@@ -371,6 +374,13 @@ select#mins-select {
 
 .register-content:nth-child(1) {
 	color: var(--action);
+}
+
+.submit-content {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: 1.2rem;
 }
 
 /* SPINNER */

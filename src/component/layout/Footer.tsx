@@ -4,7 +4,7 @@ export default function Footer() {
 			<p>
 				© 2025 Coffee Diary by{" "}
 				<a href="https://github.com/thleima/react-coffee-diary" target="_blank">
-					thleima
+					<u>thleima</u>
 					<i className="fa-brands fa-square-github"></i>
 				</a>
 			</p>

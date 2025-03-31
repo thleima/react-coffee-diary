@@ -46,8 +46,16 @@ export default function Authentication() {
 			setError(handleCredsErrors(reportError));
 		}
 	};
+
+	// Handle "Enter" key press
+	const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+		if (e.key === "Enter") {
+			handleAuthenticate();
+		}
+	};
+
 	return (
-		<>
+		<div onKeyDown={handleKeyDown} tabIndex={0}>
 			<div className="register-content">
 				{isRegister ? (
 					<p>Already have an account ?</p>
@@ -61,23 +69,29 @@ export default function Authentication() {
 				/>
 			</div>
 			<hr />
-			<h2>{isRegister ? "Sign up" : "Log in"}</h2>
-			{isRegister ? <p>Create your account</p> : <p>Connect to your account</p>}
-			{error && <p>❌ {error}</p>}
-			<input
-				value={user.email}
-				name="email"
-				onChange={handleChange}
-				placeholder="Email"
-			/>
-			<input
-				value={user.password}
-				onChange={handleChange}
-				placeholder="*****"
-				type="password"
-				name="password"
-			/>
-			<Button handleClick={handleAuthenticate} text={"Submit"} />
-		</>
+			<div className="submit-content">
+				<h2>{isRegister ? "Sign up" : "Log in"}</h2>
+				{isRegister ? (
+					<p>Create your account</p>
+				) : (
+					<p>Connect to your account</p>
+				)}
+				{error && <p>❌ {error}</p>}
+				<input
+					value={user.email}
+					name="email"
+					onChange={handleChange}
+					placeholder="Email"
+				/>
+				<input
+					value={user.password}
+					onChange={handleChange}
+					placeholder="*****"
+					type="password"
+					name="password"
+				/>
+				<Button handleClick={handleAuthenticate} text={"Submit"} />
+			</div>
+		</div>
 	);
 }

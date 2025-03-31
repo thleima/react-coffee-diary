@@ -34,5 +34,5 @@ export function useAuthState() {
 		return unsubscribe;
 	}, []);
 
-	return { user, isLoading, userData, setUserData };
+	return { user, isLoading, userData, setUserData, setUser };
 }

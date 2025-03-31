@@ -1,10 +1,10 @@
-import { useAuth } from "./store/AuthProvider";
 import Layout from "./component/Layout";
 import Benefits from "./component/layout/Benefits";
 import CoffeeForm from "./component/coffee-form/CoffeeForm";
 import AuthContent from "./component/auth-content/AuthContent";
 import BackgroundHeading from "./component/layout/BackgroundHeading";
 import Footer from "./component/layout/Footer";
+import { useAuth } from "./hooks/useAuth";
 
 function App() {
 	const { user } = useAuth();
