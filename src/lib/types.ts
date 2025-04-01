@@ -15,6 +15,7 @@ export type TDailyStats = {
 };
 
 export type THistory = {
+	time: string;
 	coffee: { name: string; caffeine: number };
 	timeSinceConsume: string;
 	remainingAmount: number;

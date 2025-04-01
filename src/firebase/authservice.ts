@@ -8,7 +8,7 @@ import {
 } from "firebase/auth";
 import { firebaseAuth, firebaseDB } from "./config";
 import { TUserFormValues } from "./authtypes";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, setDoc, updateDoc, deleteField } from "firebase/firestore";
 import { TCoffeeConsumptionHistory } from "../lib/types";
 
 //required if you want to keep logged in after user exits the browser or closes tab
@@ -48,12 +48,20 @@ const postToDatabase = async (
 	await setDoc(userRef, toPost, { merge: true });
 };
 
+const deleteFieldFromDatabase = async (userId: string, field: string) => {
+	const userRef = doc(firebaseDB, "users", userId);
+	await updateDoc(userRef, {
+		[field]: deleteField(),
+	});
+};
+
 const firebaseService = {
 	signIn,
 	signUp,
 	logout,
 	resetPassword,
 	postToDatabase,
+	deleteFieldFromDatabase,
 };
 
 export default firebaseService;

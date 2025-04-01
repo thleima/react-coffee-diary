@@ -50,7 +50,6 @@ export default function CoffeeForm() {
 			return;
 		}
 		try {
-			console.log(selectedCoffee);
 			const userDataCopy: TCoffeeConsumptionHistory = { ...userData };
 			// Process data to have the same format as in DataBase
 			// Get the timestamp as key

@@ -12,6 +12,7 @@ export const AuthContext = createContext<TAuth>({
 	logout: () => {},
 	resetPassword: () => {},
 	postToDatabase: () => {},
+	deleteCoffeeFromDatabase: () => {},
 	showLogModal: false,
 	toggleLogModal: () => {},
 });

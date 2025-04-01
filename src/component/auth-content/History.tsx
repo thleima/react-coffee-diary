@@ -1,14 +1,32 @@
 import { useAuth } from "../../hooks/useAuth";
 import { historyAsArray } from "../../utils";
+import { getErrorMessage } from "../../utils/helpers";
 import Title from "../Title";
 import TableHead from "./TableHead";
 import TableRow from "./TableRow";
 
 export default function History() {
-	const { userData } = useAuth();
+	const { userData, user, deleteCoffeeFromDatabase, setUserData } = useAuth();
 	const history = historyAsArray(userData);
+	const userid = user ? user.uid : "";
+
+	const deleteCoffee = (uid: string, time: string) => {
+		try {
+			deleteCoffeeFromDatabase(uid, time);
+		} catch (error) {
+			const message = getErrorMessage(error);
+			console.error(message);
+			alert(`An error occurred while deleting the coffee: ${message}`);
+		} finally {
+			// perform a fast refresh on userData
+			Object.keys(userData).filter((key) => key === time);
+			const newUserData = { ...userData };
+			delete newUserData[time];
+			setUserData(newUserData);
+		}
+	};
 	return (
-		<>
+		<div className="history">
 			<Title title="History" icon="timeline" />
 			<table className="stat-table">
 				<TableHead
@@ -22,6 +40,7 @@ export default function History() {
 					) : (
 						history.map((coffee, index) => {
 							const {
+								time,
 								coffee: { name, caffeine },
 								timeSinceConsume,
 								remainingAmount,
@@ -33,12 +52,13 @@ export default function History() {
 									name={name}
 									data1={timeSinceConsume}
 									data2={`${remainingAmount}mg / ${caffeine}mg`}
+									onDelete={() => deleteCoffee(userid, time)}
 								/>
 							);
 						})
 					)}
 				</tbody>
 			</table>
-		</>
+		</div>
 	);
 }

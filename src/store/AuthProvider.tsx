@@ -41,6 +41,10 @@ export const AuthProvider = ({ children }: TChildren) => {
 		await firebaseService.postToDatabase(userId, toPost);
 	};
 
+	const deleteCoffeeFromDatabase = async (userId: string, field: string) => {
+		await firebaseService.deleteFieldFromDatabase(userId, field);
+	};
+
 	const value = {
 		user,
 		userData,
@@ -50,6 +54,7 @@ export const AuthProvider = ({ children }: TChildren) => {
 		logout,
 		resetPassword,
 		postToDatabase,
+		deleteCoffeeFromDatabase,
 		showLogModal,
 		toggleLogModal,
 	};

@@ -139,6 +139,7 @@ export function historyAsArray(
 		.map((time) => {
 			const coffee = historyData[time];
 			return {
+				time,
 				coffee,
 				timeSinceConsume: timeSinceConsumption(Number(time)),
 				originalAmount: coffee.caffeine,

@@ -15,6 +15,7 @@ export type TAuth = {
 	logout: () => void;
 	resetPassword: (email: string) => void;
 	postToDatabase: (userId: string, toPost: TCoffeeConsumptionHistory) => void;
+	deleteCoffeeFromDatabase: (userId: string, field: string) => void;
 	showLogModal: boolean;
 	toggleLogModal: () => void;
 };
