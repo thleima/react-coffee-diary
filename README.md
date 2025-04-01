@@ -1,17 +1,18 @@
 ## Coffee Diary
+
 Vercel's link: https://react-coffee-diary.vercel.app/
+
 # Measure your blood caffeine levels in real time
 
-dev with React, TypeScript
+dev with React, TypeScript, Firebase
 
 ## Packages :
 
 firebase
 
-## Special feature :
+## Special features :
 
-In this project, I used for the first time, Firebase Authentification & Cloud Database coupled with TypeScript
-
-### Other :
-
-Calculation of statistics based on user inputs
+- Full stack, using TypeScript.
+- Firebase Authentification & Database.
+- Implementation of statistics for user's coffee consumption habits in real time.
+- State Management with native React useContext.
